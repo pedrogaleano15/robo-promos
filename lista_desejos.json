@@ -1,0 +1,242 @@
+{
+  "monitorar_todos_que_sigo": true,
+  "ignorar_canais": [],
+  "canais": [
+    "pichauofertas",
+    "ofertaskabum",
+    "pelandobr",
+    "cupons_desconto",
+    "MerOliveira"
+  ],
+  "produtos": [
+    {
+      "nome": "Cadeira ergonômica",
+      "ativo": true,
+      "preco_maximo": 500,
+      "termos": [
+        "cadeira",
+        "ergonom|escritorio|presidente|office|mesh|lombar"
+      ],
+      "excluir": [
+        "capa",
+        "almofada",
+        "rodizio",
+        "rodinha",
+        "apoio de pe",
+        "infantil",
+        "tapete",
+        "gamer"
+      ]
+    },
+    {
+      "nome": "Monitor provisório 21,5–24\"",
+      "ativo": true,
+      "preco_maximo": 300,
+      "termos": [
+        "monitor"
+      ],
+      "excluir": [
+        "suporte",
+        "braco articulado",
+        "pedestal",
+        "bebe",
+        "cardiaco",
+        "pressao",
+        "notebook"
+      ]
+    },
+    {
+      "nome": "Teclado",
+      "ativo": true,
+      "preco_maximo": 150,
+      "preco_minimo": 40,
+      "termos": [
+        "teclado"
+      ],
+      "excluir": [
+        "keycap",
+        "capa",
+        "pulseira",
+        "piano",
+        "musical",
+        "tablet",
+        "case"
+      ]
+    },
+    {
+      "nome": "RTX 5060 8GB",
+      "ativo": true,
+      "preco_maximo": 2600,
+      "termos": [
+        "5060"
+      ],
+      "excluir": [
+        "5060 ti",
+        "5060ti",
+        "notebook",
+        "pc gamer",
+        "computador",
+        "desktop",
+        "kit"
+      ]
+    },
+    {
+      "nome": "RTX 5070 12GB",
+      "ativo": true,
+      "preco_maximo": 4800,
+      "termos": [
+        "5070"
+      ],
+      "excluir": [
+        "5070 ti",
+        "5070ti",
+        "notebook",
+        "pc gamer",
+        "computador",
+        "desktop",
+        "kit"
+      ]
+    },
+    {
+      "nome": "Ryzen 5 7600",
+      "ativo": true,
+      "preco_maximo": 900,
+      "termos": [
+        "ryzen",
+        "7600"
+      ],
+      "excluir": [
+        "7600x",
+        "x3d",
+        "rx 7600",
+        "notebook",
+        "pc gamer",
+        "computador",
+        "desktop",
+        "kit upgrade"
+      ]
+    },
+    {
+      "nome": "SSD NVMe 1TB",
+      "ativo": true,
+      "preco_maximo": 800,
+      "termos": [
+        "ssd",
+        "1tb|1 tb",
+        "nvme|m.2|m2"
+      ],
+      "excluir": [
+        "externo",
+        "portatil",
+        "sata",
+        "notebook",
+        "case"
+      ]
+    },
+    {
+      "nome": "Memória DDR5 16GB (desktop)",
+      "ativo": true,
+      "preco_maximo": 1200,
+      "termos": [
+        "ddr5",
+        "16gb|16 gb"
+      ],
+      "excluir": [
+        "notebook",
+        "sodimm",
+        "so-dimm",
+        "2x8",
+        "pc gamer",
+        "computador"
+      ]
+    },
+    {
+      "nome": "Fone de ouvido bom (marca confiável)",
+      "ativo": true,
+      "preco_maximo": 250,
+      "preco_minimo": 60,
+      "termos": [
+        "fone|headphone|headset|earbuds|buds",
+        "jbl|sony|samsung|galaxy buds|soundcore|anker|edifier|philips|redmi buds|xiaomi|qcy|haylou|baseus|hyperx|logitech|redragon|havit|1more|sennheiser"
+      ],
+      "excluir": [
+        "capa",
+        "case para",
+        "ponteira",
+        "espuma",
+        "almofada",
+        "suporte",
+        "adaptador",
+        "cabo"
+      ]
+    },
+    {
+      "nome": "Aro roda traseira Biz 125 (14\")",
+      "ativo": true,
+      "preco_maximo": 170,
+      "preco_minimo": 60,
+      "termos": [
+        "aro|roda",
+        "biz",
+        "tras"
+      ],
+      "excluir": [
+        "diant",
+        "par ",
+        "pneu",
+        "camara",
+        "aluminio",
+        "liga leve",
+        "adesivo",
+        "friso"
+      ]
+    },
+    {
+      "nome": "Suporte de TV (parede)",
+      "ativo": true,
+      "preco_maximo": 100,
+      "preco_minimo": 25,
+      "termos": [
+        "suporte",
+        "tv|televis|monitor"
+      ],
+      "excluir": [
+        "controle",
+        "celular",
+        "notebook",
+        "headset",
+        "fone",
+        "teto"
+      ]
+    },
+    {
+      "nome": "PlayStation 5 (console)",
+      "ativo": true,
+      "preco_maximo": 3800,
+      "preco_minimo": 2000,
+      "termos": [
+        "ps5|playstation 5|playstation®5",
+        "console|slim|digital|825|1tb|1 tb|leitor"
+      ],
+      "excluir": [
+        "ps5 pro",
+        "playstation 5 pro",
+        "controle",
+        "dualsense",
+        "capa",
+        "suporte",
+        "cabo",
+        "carregador",
+        "base",
+        "headset",
+        "fone",
+        "volante",
+        "skin",
+        "portal",
+        "jogo para",
+        "midia fisica",
+        "pre-venda"
+      ]
+    }
+  ]
+}
