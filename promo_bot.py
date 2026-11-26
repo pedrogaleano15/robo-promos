@@ -318,6 +318,38 @@ async def rodar():
     await cliente.run_until_disconnected()
 
 
+async def listar_canais():
+    """Lista os canais/grupos que você segue e separa os públicos (com @),
+    que são os únicos que o GitHub consegue ler."""
+    from telethon import TelegramClient
+
+    carregar_env()
+    cliente = TelegramClient(str(PASTA / "sessao_robo"),
+                             int(os.environ["API_ID"]), os.environ["API_HASH"])
+    await cliente.start()
+    publicos, privados = [], []
+    async for d in cliente.iter_dialogs():
+        if not d.is_channel:
+            continue
+        user = getattr(d.entity, "username", None)
+        if not user:
+            usernames = getattr(d.entity, "usernames", None) or []
+            ativos = [u.username for u in usernames if getattr(u, "active", False)]
+            user = ativos[0] if ativos else None
+        (publicos if user else privados).append((d.name, user))
+    await cliente.disconnect()
+
+    print("\n=== PÚBLICOS (o GitHub consegue ler) ===")
+    for nome, user in publicos:
+        print(f"  {user:<28} {nome}")
+    print("\n=== PRIVADOS (só o robô do PC lê) ===")
+    for nome, _ in privados:
+        print(f"  {nome}")
+    trecho = json.dumps([u for _, u in publicos], ensure_ascii=False, indent=2)
+    (PASTA / "canais_publicos.txt").write_text(trecho, encoding="utf-8")
+    print("\nLista salva em canais_publicos.txt")
+
+
 def descobrir_chat():
     carregar_env()
     token = os.environ.get("BOT_TOKEN")
@@ -352,6 +384,8 @@ def testar():
 if __name__ == "__main__":
     if "--descobrir-chat" in sys.argv:
         descobrir_chat()
+    elif "--listar-canais" in sys.argv:
+        asyncio.run(listar_canais())
     elif "--testar" in sys.argv:
         testar()
     else:
