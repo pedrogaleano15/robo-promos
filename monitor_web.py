@@ -75,6 +75,9 @@ def main():
         sys.exit("Faltam BOT_TOKEN e CHAT_ID (no .env ou nos Secrets do GitHub).")
 
     bot_ok = checar_bot()
+    if bot_ok and os.environ.get("TESTE_AVISO") == "true":
+        ok = avisar_por_bot("✅ Teste do GitHub: o Caçador de Promos está funcionando e vai te avisar por aqui!")
+        print("Mensagem de teste enviada!" if ok else "FALHA ao enviar teste: confira o secret CHAT_ID")
     lista = Lista(ARQ_LISTA)
     estado = carregar_estado()
     avisos = 0
