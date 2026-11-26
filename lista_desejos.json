@@ -251,6 +251,18 @@
         "midia fisica",
         "pre-venda"
       ]
+    },
+    {
+      "nome": "🔴 Live da Pichau começando",
+      "ativo": true,
+      "so_palavras": true,
+      "so_canais": [
+        "pichauofertas"
+      ],
+      "termos": [
+        "live|ao vivo|aovivo|youtube.com/live|twitch.tv"
+      ],
+      "excluir": []
     }
   ]
 }

@@ -135,6 +135,13 @@ def analisar_mensagem(texto: str, produtos: list):
     if len(blocos_com_preco) <= 1:
         blocos = [texto]
     for produto in produtos:
+        # Alertas só por palavras (ex.: "live da Pichau começou"), sem preço.
+        if produto.get("so_palavras"):
+            for bloco in blocos:
+                if produto_bate(produto, normalizar(bloco)):
+                    achados.append((produto, 0.0, bloco))
+                    break
+            continue
         teto = float(produto["preco_maximo"])
         for idx, bloco in enumerate(blocos):
             bloco_norm = normalizar(bloco)
@@ -220,6 +227,9 @@ def reais(valor: float) -> str:
 
 
 def montar_aviso(produto, preco, trecho, canal, link_msg):
+    if produto.get("so_palavras"):
+        return (f"📢 {produto['nome']}\n📢 Canal: {canal}\n\n"
+                f"{trecho.strip()[:900]}\n\n🔗 {link_msg}")
     teto = float(produto["preco_maximo"])
     return (
         f"🔥 PROMOÇÃO NA SUA LISTA\n\n"

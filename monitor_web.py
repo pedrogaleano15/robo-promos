@@ -105,9 +105,11 @@ def main():
         falhas_canal = []
         print(f"[{canal}] {len(novos)} posts novos")
         for pid, texto in novos:
-            for produto, preco, trecho in analisar_mensagem(texto, lista.produtos):
+            produtos_canal = [p for p in lista.produtos
+                              if not p.get("so_canais") or canal in p["so_canais"]]
+            for produto, preco, trecho in analisar_mensagem(texto, produtos_canal):
                 link = f"https://t.me/{canal}/{pid}"
-                print(f"  ACHOU: {produto['nome']} por R$ {preco:.2f} ({link})")
+                print(f"  ACHOU: {produto['nome']}" + ("" if produto.get("so_palavras") else f" por R$ {preco:.2f}") + f" ({link})")
                 if bot_ok and avisar_por_bot(montar_aviso(produto, preco, trecho, canal, link)):
                     avisos += 1
                 else:
