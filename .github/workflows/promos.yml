@@ -2,7 +2,7 @@ name: Caçador de promoções
 
 on:
   schedule:
-    - cron: "*/15 * * * *"   # a cada 15 minutos (horário UTC; o GitHub pode atrasar alguns minutos)
+    - cron: "4,19,34,49 * * * *"   # 4x por hora, fora do minuto 0 (o GitHub descarta muitos agendamentos no minuto 0)
   workflow_dispatch:         # botão "Run workflow" para rodar na hora
 
 permissions:
@@ -17,9 +17,9 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 5
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
 
-      - uses: actions/setup-python@v5
+      - uses: actions/setup-python@v6
         with:
           python-version: "3.12"
 
