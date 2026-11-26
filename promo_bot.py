@@ -172,9 +172,34 @@ def agora():
     return datetime.now().strftime("%d/%m %H:%M:%S")
 
 
+def limpar_segredo(valor):
+    """Tira espaços, aspas e um 'BOT_TOKEN=' / 'CHAT_ID=' colado por engano."""
+    valor = (valor or "").strip().strip('"').strip("'").strip()
+    valor = re.sub(r"^(bot_token|chat_id)\s*=\s*", "", valor, flags=re.I)
+    if valor.lower().startswith("bot") and ":" in valor[3:]:
+        valor = valor[3:]  # 'bot123:ABC' -> '123:ABC'
+    return valor.strip().strip('"').strip("'").strip()
+
+
+def checar_bot() -> bool:
+    """Confere se o token é aceito pelo Telegram (não envia mensagem)."""
+    token = limpar_segredo(os.environ.get("BOT_TOKEN"))
+    try:
+        with urllib.request.urlopen(f"https://api.telegram.org/bot{token}/getMe", timeout=15) as r:
+            nome = json.load(r)["result"].get("username")
+        print(f"[{agora()}] Bot OK: @{nome}")
+        return True
+    except Exception as erro:  # noqa: BLE001
+        partes = token.split(":")
+        formato = "ok" if len(partes) == 2 and partes[0].isdigit() and len(partes[1]) >= 30 else "INVÁLIDO"
+        print(f"[{agora()}] ERRO NO BOT_TOKEN ({erro}). Formato do token: {formato} "
+              f"({len(token)} caracteres). Recrie o secret BOT_TOKEN só com o token do BotFather.")
+        return False
+
+
 def avisar_por_bot(texto: str) -> bool:
-    token = os.environ.get("BOT_TOKEN")
-    chat_id = os.environ.get("CHAT_ID")
+    token = limpar_segredo(os.environ.get("BOT_TOKEN"))
+    chat_id = limpar_segredo(os.environ.get("CHAT_ID"))
     if not token or not chat_id:
         return False
     dados = urllib.parse.urlencode({

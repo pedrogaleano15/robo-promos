@@ -27,7 +27,7 @@ except ImportError:
     pass
 
 from promo_bot import (  # reaproveita as regras do robô
-    ARQ_LISTA, Lista, analisar_mensagem, avisar_por_bot, carregar_env, montar_aviso,
+    ARQ_LISTA, Lista, analisar_mensagem, avisar_por_bot, carregar_env, checar_bot, montar_aviso,
 )
 
 PASTA = Path(__file__).resolve().parent
@@ -74,9 +74,11 @@ def main():
     if not os.environ.get("BOT_TOKEN") or not os.environ.get("CHAT_ID"):
         sys.exit("Faltam BOT_TOKEN e CHAT_ID (no .env ou nos Secrets do GitHub).")
 
+    bot_ok = checar_bot()
     lista = Lista(ARQ_LISTA)
     estado = carregar_estado()
     avisos = 0
+    falhas = []
 
     for canal in lista.canais:
         try:
@@ -97,18 +99,25 @@ def main():
             continue
 
         novos = [(pid, txt) for pid, txt in posts if pid > ultimo]
+        falhas_canal = []
         print(f"[{canal}] {len(novos)} posts novos")
         for pid, texto in novos:
             for produto, preco, trecho in analisar_mensagem(texto, lista.produtos):
                 link = f"https://t.me/{canal}/{pid}"
-                if avisar_por_bot(montar_aviso(produto, preco, trecho, canal, link)):
+                print(f"  ACHOU: {produto['nome']} por R$ {preco:.2f} ({link})")
+                if bot_ok and avisar_por_bot(montar_aviso(produto, preco, trecho, canal, link)):
                     avisos += 1
-                    print(f"  AVISO: {produto['nome']} por R$ {preco:.2f} ({link})")
-        estado[canal] = max(ultimo, maior)
+                else:
+                    falhas.append(link)
+                    falhas_canal.append(pid)
+        # Se algum aviso falhou, volta o marcador para tentar de novo na próxima execução.
+        estado[canal] = (min(falhas_canal) - 1) if falhas_canal else max(ultimo, maior)
 
     estado["_atualizado"] = datetime.now(timezone.utc).isoformat(timespec="seconds")
     ARQ_ESTADO.write_text(json.dumps(estado, indent=2, ensure_ascii=False), encoding="utf-8")
     print(f"Concluído. {avisos} aviso(s) enviado(s).")
+    if falhas:
+        print(f"ATENÇÃO: {len(falhas)} oferta(s) achada(s) mas NÃO enviada(s): " + " ".join(falhas))
 
 
 if __name__ == "__main__":
