@@ -131,6 +131,26 @@
       ]
     },
     {
+      "nome": "Kit upgrade Ryzen 5 7600/7600X + placa-mãe AM5",
+      "ativo": true,
+      "preco_maximo": 1100,
+      "preco_minimo": 600,
+      "termos": [
+        "kit",
+        "7600",
+        "b840|b850|b650|a620|placa"
+      ],
+      "excluir": [
+        "16gb",
+        "32gb",
+        "8gb",
+        "rx 7600",
+        "pc gamer",
+        "computador",
+        "notebook"
+      ]
+    },
+    {
       "nome": "SSD NVMe 1TB",
       "ativo": true,
       "preco_maximo": 800,
