@@ -24,6 +24,15 @@
   ],
   "produtos": [
     {
+      "nome": "⚠️ Possível ERRO DE PREÇO / bug",
+      "ativo": true,
+      "so_palavras": true,
+      "termos": [
+        "erro de preco|erro no preco|preco bugado|bug de preco|bugou|bugado|preco errado|corre que e erro|erro do site"
+      ],
+      "excluir": []
+    },
+    {
       "nome": "Cadeira ergonômica",
       "ativo": true,
       "preco_maximo": 500,
